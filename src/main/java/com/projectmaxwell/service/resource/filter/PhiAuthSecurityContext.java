@@ -49,7 +49,8 @@ public class PhiAuthSecurityContext implements SecurityContext {
 			// this user has this scope?
 			return token.getScopesAsSet().contains(scope);
 		} catch (Exception e) {
-			throw new InvalidTokenException(String.valueOf(Math.random()),"Could compare returned scopes with allowed scopes due to exception.");
+			System.out.println("Scopes failed.");
+			throw new InvalidTokenException(String.valueOf(Math.random()),"Could not compare returned scopes with allowed scopes due to exception.");
 		}
 	}
 }

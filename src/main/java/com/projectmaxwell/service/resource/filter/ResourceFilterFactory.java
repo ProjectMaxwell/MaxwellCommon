@@ -58,7 +58,6 @@ WebApplicationException(Response.Status.FORBIDDEN);
     } */
 
     public List<ResourceFilter> create(AbstractMethod am) { 
-    	//System.out.println("Resource Filter Factory triggered.");
     	
     	List<ResourceFilter> rolesFilters = super.create(am);
     	if(rolesFilters == null){
@@ -70,10 +69,6 @@ WebApplicationException(Response.Status.FORBIDDEN);
     	if(am.isAnnotationPresent(RolesAllowed.class)){
     		filters.add(0,pasf);
     	}
-    	
-/*    	if(am.isAnnotationPresent(RolesAllowed.class)){
-    		
-    	}*/
     	
     	return filters;
     	

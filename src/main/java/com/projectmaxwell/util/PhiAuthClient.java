@@ -33,7 +33,7 @@ public class PhiAuthClient {
 		PhiAuthClient.hostname = hostname;
 	}
 	
-	public static TokenWrapper validateToken(String token) throws URISyntaxException, HttpException, IOException{
+	public static TokenWrapper validateToken(String token) throws URISyntaxException, HttpException, IOException, DependentServiceException, UnableToValidateException{
 		DefaultHttpClient httpClient = new DefaultHttpClient();
 		String uri = hostname + String.format(VALIDATE_ENDPOINT, token);
 		HttpGet request = new HttpGet(uri);
@@ -50,8 +50,11 @@ public class PhiAuthClient {
 		}catch(Exception e){
 			try{
 				MaxwellException me = mapper.readValue(resp, MaxwellException.class);
+				System.out.println("Downstream error.");
 				throw new DependentServiceException(me);
 			}catch(Exception e2){
+				System.out.println("Unknown error.");
+				System.out.println(resp);
 				throw new UnableToValidateException(String.valueOf(Math.random()),"Unknown error from PhiAuth: " + resp);
 			}
 		}

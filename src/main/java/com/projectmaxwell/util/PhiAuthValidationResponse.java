@@ -7,9 +7,10 @@ public class PhiAuthValidationResponse {
 	private int ttl;
 	private String[] scopes;
 	private String grantType;
-	private int userId;
+	private Integer userId;
 	private String clientId;
 	private String assertionType;
+	private Integer userTypeId;
 	
 	public String getAccessToken() {
 		return accessToken;
@@ -51,7 +52,7 @@ public class PhiAuthValidationResponse {
 		this.grantType = grantType;
 	}
 
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
@@ -73,6 +74,14 @@ public class PhiAuthValidationResponse {
 
 	public void setAssertionType(String assertionType) {
 		this.assertionType = assertionType;
+	}
+
+	public Integer getUserTypeId() {
+		return userTypeId;
+	}
+
+	public void setUserTypeId(Integer userTypeId) {
+		this.userTypeId = userTypeId;
 	}
 	
 	

@@ -11,7 +11,7 @@ public class UnableToValidateException extends WebApplicationException {
 	public UnableToValidateException(String errorId, String errorMessage) {
 		super(Response.status(Response.Status.BAD_REQUEST).entity(
 				new MaxwellException(errorId, errorCode, errorMessage))
-				.build()); 
+				.build());
 		
 	}
 }
