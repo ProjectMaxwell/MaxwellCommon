@@ -25,10 +25,11 @@ public class DatasourceConnection {
 			if (datasource == null) {  
 				DatasourceConnection.initDatasource();        
 			}
-			if(datasource.getConnection() == null){
-						throw new DependentServiceException(String.valueOf(Math.random()), "Could not establish connection to datasource.");
+			Connection con = datasource.getConnection();
+			if(con == null){
+					throw new DependentServiceException(String.valueOf(Math.random()), "Could not establish connection to datasource.");
 			}
-			return datasource.getConnection();        
+			return con;        
 		} catch (SQLException e) {            
 			throw new WebApplicationException(e);        
 		}    

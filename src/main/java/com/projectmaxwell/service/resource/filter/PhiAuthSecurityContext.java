@@ -45,24 +45,17 @@ public class PhiAuthSecurityContext implements SecurityContext {
 		if (null == session || !session.isActive()) {
 			//TODO: Use session stuff or delete it
 			System.out.println("Warning: Authorization was passed insecurely");
-			// Forbidden
-			/*Response denied = Response.status(Response.Status.FORBIDDEN).entity("Permission Deniedasdf").build();
-			throw new WebApplicationException(denied);*/
 		}
 		
 		if(token == null){
 			LOGGER.log(Level.SEVERE,"No token provided.");
 			throw new InvalidTokenException(String.valueOf(Math.random()),"No authorization token was passed with request.");
-		}else{
-			System.out.println("Token provided.");
-			LOGGER.log(Level.SEVERE,"Token provided.");
 		}
 
 		try {
 			// this user has this scope?
 			return token.getScopesAsSet().contains(scope);
 		} catch (Exception e) {
-			e.printStackTrace();
 			LOGGER.log(Level.SEVERE,e.getMessage());
 			throw new InvalidTokenException(String.valueOf(Math.random()),"Could not compare returned scopes with allowed scopes due to exception.");
 		}
