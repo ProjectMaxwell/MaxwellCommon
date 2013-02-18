@@ -1,15 +1,22 @@
 package com.projectmaxwell.exception;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class MaxwellException {
+
+private static final Logger LOGGER = Logger.getLogger(MaxwellException.class.getName());
 
 	protected String errorId;
 	protected String errorMessage;
 	protected String errorCode;
 	
 	public MaxwellException(String errorId, String errorCode, String errorMessage){
+		System.out.println("errorMessage: " + errorMessage);
 		this.errorId = errorId;
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
+		LOGGER.log(Level.SEVERE, errorMessage);
 	}
 	
 	public String getErrorId() {

@@ -1,4 +1,4 @@
-package com.projectmaxwell.phiauth.service;
+package com.projectmaxwell.service;
 
 public enum SupportedHttpMethods {
 	POST,

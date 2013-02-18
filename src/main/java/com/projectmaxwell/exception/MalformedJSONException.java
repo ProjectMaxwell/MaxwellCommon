@@ -1,6 +1,7 @@
 package com.projectmaxwell.exception;
 
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
@@ -11,7 +12,7 @@ public class MalformedJSONException extends WebApplicationException {
 	
 	public MalformedJSONException(String errorId, String errorMessage) {
 		super(Response.status(Response.Status.BAD_REQUEST).entity(
-				new MaxwellException(errorId, errorCode, errorMessage))
+				new MaxwellException(errorId, errorCode, errorMessage)).type(MediaType.APPLICATION_JSON)
 				.build()); 
 	}
 }

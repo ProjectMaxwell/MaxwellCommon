@@ -1,4 +1,4 @@
-package com.projectmaxwell.phiauth.service.resource.provider;
+package com.projectmaxwell.service.resource.provider;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

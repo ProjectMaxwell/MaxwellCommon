@@ -10,6 +10,7 @@ import javax.ws.rs.ext.Provider;
 import org.apache.http.HttpException;
 
 import com.projectmaxwell.exception.DependentServiceException;
+import com.projectmaxwell.exception.InvalidTokenException;
 import com.projectmaxwell.exception.UnableToValidateException;
 import com.projectmaxwell.util.PhiAuthClient;
 import com.sun.jersey.spi.container.ContainerRequest;
@@ -20,17 +21,16 @@ import com.sun.jersey.spi.container.ResourceFilter;
 @Provider
 @Produces("application/json")
 public class PhiAuthSecurityFilter implements ResourceFilter, ContainerRequestFilter {
-
+	
 	@Override
 	public ContainerRequest filter(ContainerRequest request) {
-
+		
 		final String accessToken = request.getHeaderValue("Authorization");
 
 		Session session = null;
 		TokenWrapper response = null;
  
 		if (accessToken != null && accessToken.length() > 0) {
-			
 			try {
 				PhiAuthClient.setHostname("http://evergreenalumniclub.com:7080/PhiAuth/rest");
 				response = PhiAuthClient.validateToken(accessToken);
@@ -45,6 +45,8 @@ public class PhiAuthSecurityFilter implements ResourceFilter, ContainerRequestFi
 			} catch (UnableToValidateException e){
 				throw new WebApplicationException();
 			}
+		}else{
+			throw new InvalidTokenException(String.valueOf(Math.random()),"No token provided");
 		}
 
 		// Set security context
