@@ -13,6 +13,5 @@ public class UnableToValidateException extends WebApplicationException {
 		super(Response.status(Response.Status.BAD_REQUEST).entity(
 				new MaxwellException(errorId, errorCode, errorMessage)).type(MediaType.APPLICATION_JSON)
 				.build());
-		
 	}
 }
